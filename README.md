@@ -12,11 +12,15 @@ dotfiles/
     settings.json       #   permissions, hooks, plugins
     commands/           #   custom slash commands
     hooks/              #   post-tool-use hooks
+  git/                  # ~ — git config
+    .gitconfig
   powershell/           # Documents/WindowsPowerShell (Windows)
     Microsoft.PowerShell_profile.ps1
     gh-copilot.ps1
   pwsh/                 # Documents/PowerShell (Windows, PS 7)
     Microsoft.PowerShell_profile.ps1
+  windows-terminal/     # Windows Terminal settings (Windows)
+    settings.json
 ```
 
 ## Setup

@@ -1,0 +1,15 @@
+[user]
+	name = OseSem
+	email = sem@osesem.xyz
+	signingkey = ~/.ssh/id_ed25519
+[commit]
+	gpgsign = true
+[init]
+	templateDir = ~/.git-template
+	defaultBranch = main
+[alias]
+	cma = !git add -A && git commit -m
+[tag]
+	gpgSign = true
+[gpg]
+	format = ssh

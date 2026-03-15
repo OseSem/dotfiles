@@ -45,6 +45,21 @@ MODULES = {
         "target": _windows_documents() / "PowerShell" if IS_WINDOWS else None,
         "platform": "windows",
     },
+    "git": {
+        "target": Path.home(),
+        "platform": "all",
+    },
+    "windows-terminal": {
+        "target": Path.home()
+        / "AppData"
+        / "Local"
+        / "Packages"
+        / "Microsoft.WindowsTerminal_8wekyb3d8bbwe"
+        / "LocalState"
+        if IS_WINDOWS
+        else None,
+        "platform": "windows",
+    },
     # "hyprland": {
     #     "target": Path.home() / ".config" / "hypr",
     #     "platform": "linux",

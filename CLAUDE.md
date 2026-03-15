@@ -18,8 +18,10 @@ Cross-platform dotfiles repo. Configs are stored here and linked into their targ
 | Module | Target | Platform |
 |--------|--------|----------|
 | `claude/` | `~/.claude` | all |
+| `git/` | `~` | all |
 | `powershell/` | `Documents/WindowsPowerShell` | windows |
 | `pwsh/` | `Documents/PowerShell` | windows |
+| `windows-terminal/` | `AppData/.../WindowsTerminal/LocalState` | windows |
 
 ## setup.py behavior
 
