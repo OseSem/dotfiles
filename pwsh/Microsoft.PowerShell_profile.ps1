@@ -5,7 +5,6 @@ oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\star.omp.json" | Invoke-Exp
 # Initialize GitHub Copilot
 . "C:\Users\info\OneDrive\Documenten\WindowsPowerShell\gh-copilot.ps1"
 
-
 # Make a shortcut to activate venv
 function venv {
     & "$PWD\.venv\Scripts\Activate.ps1"
@@ -30,5 +29,5 @@ Set-Alias claude "$env:USERPROFILE\.local\bin\claude.exe"
 # See https://ch0.co/tab-completion for details.
 $ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
 if (Test-Path($ChocolateyProfile)) {
-  Import-Module "$ChocolateyProfile"
+    Import-Module "$ChocolateyProfile"
 }
