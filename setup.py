@@ -17,6 +17,18 @@ from pathlib import Path
 DOTFILES_DIR = Path(__file__).resolve().parent
 IS_WINDOWS = sys.platform == "win32"
 
+
+def _windows_documents() -> Path:
+    """Get the Windows Documents folder (handles OneDrive redirection)."""
+    if not IS_WINDOWS:
+        return Path.home() / "Documents"
+    import ctypes.wintypes
+
+    buf = ctypes.create_unicode_buffer(ctypes.wintypes.MAX_PATH)
+    ctypes.windll.shell32.SHGetFolderPathW(None, 0x0005, None, 0, buf)
+    return Path(buf.value)
+
+
 # Each module: source dir in repo → target on system.
 # "platform" can be "all", "linux", or "windows".
 # All files/dirs inside the source get linked into the target.
@@ -25,16 +37,16 @@ MODULES = {
         "target": Path.home() / ".claude",
         "platform": "all",
     },
+    "powershell": {
+        "target": _windows_documents() / "WindowsPowerShell" if IS_WINDOWS else None,
+        "platform": "windows",
+    },
+    "pwsh": {
+        "target": _windows_documents() / "PowerShell" if IS_WINDOWS else None,
+        "platform": "windows",
+    },
     # "hyprland": {
     #     "target": Path.home() / ".config" / "hypr",
-    #     "platform": "linux",
-    # },
-    # "waybar": {
-    #     "target": Path.home() / ".config" / "waybar",
-    #     "platform": "linux",
-    # },
-    # "kitty": {
-    #     "target": Path.home() / ".config" / "kitty",
     #     "platform": "linux",
     # },
 }
