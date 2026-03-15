@@ -1,0 +1,34 @@
+# Ruff cache
+.ruff_cache/
+
+# Claude
+
+## Credentials and secrets
+claude/.credentials.json
+
+## Cache and ephemeral data
+claude/cache/
+claude/chrome/
+claude/debug/
+claude/downloads/
+claude/file-history/
+claude/ide/
+claude/paste-cache/
+claude/plans/
+claude/plugins/
+claude/session-env/
+claude/sessions/
+claude/shell-snapshots/
+claude/statsig/
+claude/tasks/
+claude/telemetry/
+claude/todos/
+claude/backups/
+
+## Large/generated files
+claude/history.jsonl
+claude/stats-cache.json
+claude/mcp-needs-auth-cache.json
+
+## Project session data (UUID dirs)
+claude/projects/*/[0-9a-f]*-*-*-*-*
