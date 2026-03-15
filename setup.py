@@ -17,6 +17,42 @@ from pathlib import Path
 DOTFILES_DIR = Path(__file__).resolve().parent
 IS_WINDOWS = sys.platform == "win32"
 
+# --- Output ---
+
+try:
+    from rich.console import Console
+
+    _console = Console()
+
+    def log(status: str, msg: str, extra: str = "") -> None:
+        styles = {
+            "OK": "[bold green]  OK[/]",
+            "HARDLINK": "[bold cyan]  HARDLINK[/]",
+            "SYMLINK": "[bold cyan]  SYMLINK[/]",
+            "JUNCTION": "[bold cyan]  JUNCTION[/]",
+            "BACKUP": "[bold yellow]  BACKUP[/]",
+            "SKIP": "[dim]  SKIP[/]",
+            "ERROR": "[bold red]  ERROR[/]",
+            "HEADER": "[bold]",
+        }
+        prefix = styles.get(status, f"  {status}")
+        if status == "MODULE":
+            _console.print(f"\n[bold dodger_blue2]\\[{msg}][/] {extra}")
+        elif status == "HEADER":
+            _console.print(f"{prefix}{msg}[/]")
+        else:
+            _console.print(f"{prefix}  {msg}")
+
+except ImportError:
+
+    def log(status: str, msg: str, extra: str = "") -> None:
+        if status == "MODULE":
+            print(f"\n[{msg}] {extra}")
+        elif status == "HEADER":
+            print(msg)
+        else:
+            print(f"  {status}  {msg}")
+
 
 def _windows_documents() -> Path:
     """Get the Windows Documents folder (handles OneDrive redirection)."""
@@ -50,20 +86,18 @@ MODULES = {
         "platform": "all",
     },
     "windows-terminal": {
-        "target": Path.home()
-        / "AppData"
-        / "Local"
-        / "Packages"
-        / "Microsoft.WindowsTerminal_8wekyb3d8bbwe"
-        / "LocalState"
-        if IS_WINDOWS
-        else None,
+        "target": (
+            Path.home()
+            / "AppData"
+            / "Local"
+            / "Packages"
+            / "Microsoft.WindowsTerminal_8wekyb3d8bbwe"
+            / "LocalState"
+            if IS_WINDOWS
+            else None
+        ),
         "platform": "windows",
     },
-    # "hyprland": {
-    #     "target": Path.home() / ".config" / "hypr",
-    #     "platform": "linux",
-    # },
 }
 
 
@@ -102,7 +136,7 @@ def is_hardlink_to(src: Path, dst: Path) -> bool:
 
 def backup_existing(dst: Path) -> None:
     backup = dst.with_suffix(dst.suffix + ".bak")
-    print(f"  BACKUP  {dst} -> {backup}")
+    log("BACKUP", f"{dst} -> {backup}")
     if dst.is_dir():
         if backup.exists():
             shutil.rmtree(str(backup))
@@ -117,7 +151,7 @@ def link_dir(src: Path, dst: Path) -> None:
     if is_junction(dst) or dst.is_symlink():
         try:
             if dst.resolve() == src.resolve():
-                print(f"  OK  {dst}")
+                log("OK", str(dst))
                 return
         except OSError:
             pass
@@ -137,21 +171,21 @@ def link_dir(src: Path, dst: Path) -> None:
             check=True,
             capture_output=True,
         )
-        print(f"  JUNCTION  {dst} -> {src}")
+        log("JUNCTION", f"{dst} -> {src}")
     else:
         os.symlink(src, dst)
-        print(f"  SYMLINK  {dst} -> {src}")
+        log("SYMLINK", f"{dst} -> {src}")
 
 
 def link_file(src: Path, dst: Path) -> None:
     if dst.is_symlink():
         if dst.resolve() == src.resolve():
-            print(f"  OK  {dst}")
+            log("OK", str(dst))
             return
         dst.unlink()
     elif dst.exists():
         if IS_WINDOWS and is_hardlink_to(src, dst):
-            print(f"  OK  {dst}")
+            log("OK", str(dst))
             return
         backup_existing(dst)
     else:
@@ -160,13 +194,13 @@ def link_file(src: Path, dst: Path) -> None:
     if IS_WINDOWS:
         try:
             os.link(src, dst)
-            print(f"  HARDLINK  {dst} -> {src}")
+            log("HARDLINK", f"{dst} -> {src}")
         except OSError:
             os.symlink(src, dst)
-            print(f"  SYMLINK  {dst} -> {src}")
+            log("SYMLINK", f"{dst} -> {src}")
     else:
         os.symlink(src, dst)
-        print(f"  SYMLINK  {dst} -> {src}")
+        log("SYMLINK", f"{dst} -> {src}")
 
 
 def link(src: Path, dst: Path) -> None:
@@ -177,10 +211,10 @@ def link(src: Path, dst: Path) -> None:
 
 
 def setup_module(name: str, target: Path, src_dir: Path) -> None:
-    print(f"\n[{name}] {src_dir} -> {target}")
+    log("MODULE", name, f"{src_dir} -> {target}")
 
     if not src_dir.exists():
-        print("  SKIP  source dir not found")
+        log("SKIP", "source dir not found")
         return
 
     target.mkdir(parents=True, exist_ok=True)
@@ -190,18 +224,18 @@ def setup_module(name: str, target: Path, src_dir: Path) -> None:
 
 
 def main() -> None:
-    print(f"Dotfiles: {DOTFILES_DIR}")
-    print(f"Platform: {current_platform()}")
+    log("HEADER", f"Dotfiles: {DOTFILES_DIR}")
+    log("HEADER", f"Platform: {current_platform()}")
 
     for name, cfg in MODULES.items():
         if not should_run(cfg["platform"]):
-            print(f"\n[{name}] SKIP (platform: {cfg['platform']})")
+            log("MODULE", name, f"SKIP (platform: {cfg['platform']})")
             continue
 
         src_dir = DOTFILES_DIR / name
         setup_module(name, cfg["target"], src_dir)
 
-    print("\nDone.")
+    log("HEADER", "\nDone.")
 
 
 if __name__ == "__main__":
