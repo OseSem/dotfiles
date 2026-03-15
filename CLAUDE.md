@@ -38,7 +38,7 @@ Cross-platform dotfiles repo. Configs are stored here and linked into their targ
 
 ## Conventions
 
-- Never commit credentials or secrets.
+- **Never commit sensitive files.** If unsure whether a file contains credentials, tokens, or secrets, ask before staging it. Always list any potentially sensitive files at the end of a commit summary so nothing slips through unnoticed.
 - Module directories mirror the structure of their target — files go where they'd be inside the target dir.
 - Platform values: `"all"`, `"linux"`, `"windows"`.
 - **Never push to remote without explicit permission.** Commit freely, but always ask before running `git push` unless the user specifically requested it.
