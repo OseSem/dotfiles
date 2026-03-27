@@ -1,6 +1,14 @@
 # Initialize Oh My Posh + Theme
 oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\star.omp.json" | Invoke-Expression
 
+# Tell Windows Terminal the current directory (for split pane inheritance)
+[System.Environment]::SetEnvironmentVariable("PROMPT_COMMAND", "", "Process")
+$global:__OriginalPrompt = $function:prompt
+function prompt {
+    $loc = $executionContext.SessionState.Path.CurrentLocation
+    [Console]::Write("`e]9;9;$loc`e\")
+    & $global:__OriginalPrompt
+}
 
 # Initialize GitHub Copilot
 . "C:\Users\info\OneDrive\Documenten\WindowsPowerShell\gh-copilot.ps1"
