@@ -30,6 +30,7 @@
 - Keep subject line under 72 characters
 - Add a body when the change is non-trivial
 - Never force push without explicit user confirmation
+- Never add Co-Authored-By lines to commits
 
 ## Environment
   - Running on Windows with Git Bash (`C:\Program Files\Git\bin\bash.exe`)

@@ -44,4 +44,3 @@ Cross-platform dotfiles repo. Configs are stored here and linked into their targ
 - Module directories mirror the structure of their target — files go where they'd be inside the target dir.
 - Platform values: `"all"`, `"linux"`, `"windows"`.
 - **Never push to remote without explicit permission.** Commit freely, but always ask before running `git push` unless the user specifically requested it.
-- **No Co-Authored-By trailers.** Do not add `Co-Authored-By` lines to commit messages.
