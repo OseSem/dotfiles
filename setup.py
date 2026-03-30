@@ -31,6 +31,7 @@ try:
             "SYMLINK": "[bold cyan]  SYMLINK[/]",
             "JUNCTION": "[bold cyan]  JUNCTION[/]",
             "BACKUP": "[bold yellow]  BACKUP[/]",
+            "COPY": "[bold magenta]  COPY[/]",
             "SKIP": "[dim]  SKIP[/]",
             "ERROR": "[bold red]  ERROR[/]",
             "HEADER": "[bold]",
@@ -216,8 +217,8 @@ def link_file(src: Path, dst: Path) -> None:
             os.link(src, dst)
             log("HARDLINK", f"{dst} -> {src}")
         except OSError:
-            os.symlink(src, dst)
-            log("SYMLINK", f"{dst} -> {src}")
+            shutil.copy2(src, dst)
+            log("COPY", f"{dst} -> {src}")
     else:
         os.symlink(src, dst)
         log("SYMLINK", f"{dst} -> {src}")
