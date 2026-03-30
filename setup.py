@@ -98,6 +98,26 @@ MODULES = {
         ),
         "platform": "windows",
     },
+    "nvim": {
+        "target": (
+            Path.home() / "AppData" / "Local" / "nvim"
+            if IS_WINDOWS
+            else Path.home() / ".config" / "nvim"
+        ),
+        "platform": "all",
+    },
+    "sharex": {
+        "target": Path("D:/ShareX") if IS_WINDOWS else None,
+        "platform": "windows",
+    },
+    "oh-my-posh": {
+        "target": (
+            Path.home() / "AppData" / "Local" / "Programs" / "oh-my-posh"
+            if IS_WINDOWS
+            else Path.home() / ".config" / "oh-my-posh"
+        ),
+        "platform": "all",
+    },
 }
 
 

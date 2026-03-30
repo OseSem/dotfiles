@@ -22,6 +22,9 @@ Cross-platform dotfiles repo. Configs are stored here and linked into their targ
 | `powershell/` | `Documents/WindowsPowerShell` | windows |
 | `pwsh/` | `Documents/PowerShell` | windows |
 | `windows-terminal/` | `AppData/.../WindowsTerminal/LocalState` | windows |
+| `nvim/` | `AppData/Local/nvim` (win) / `~/.config/nvim` (linux) | all |
+| `sharex/` | `D:\ShareX` | windows |
+| `oh-my-posh/` | `AppData/.../Programs/oh-my-posh` (win) / `~/.config/oh-my-posh` (linux) | all |
 
 ## setup.py behavior
 
