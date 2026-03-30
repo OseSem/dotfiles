@@ -38,15 +38,10 @@ For each eligible PR, run:
 
 ```bash
 gh pr review <number> --approve
-gh pr merge <number> --squash --auto
-```
-
-Use `--auto` so GitHub handles merge queues and branch protection rules. If `--auto` is not supported (repo doesn't have auto-merge enabled), fall back to:
-
-```bash
-gh pr review <number> --approve
 gh pr merge <number> --squash
 ```
+
+Do NOT use `--auto` — auto-merge is not enabled on any repo.
 
 Process PRs one at a time. If a merge fails (e.g., merge conflict), report it and continue with the next PR.
 
@@ -57,7 +52,15 @@ For PRs that had failing checks:
 - Tell the user: "These PRs have failing checks — you may want to investigate them. I've skipped them for now."
 - Do NOT attempt to merge them
 
-### 6. Summary
+### 6. Pull main
+
+After all merges are done, update the local branch:
+
+```bash
+git pull
+```
+
+### 7. Summary
 
 At the end, print a summary:
 - Successfully merged: list of PR titles
