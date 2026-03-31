@@ -43,3 +43,8 @@
 - When unsure between two approaches, briefly state the tradeoff and ask
 - Don't add unnecessary comments to code that is already self-explanatory
 - Prefer returning early over deeply nested conditionals
+- When creating a `CLAUDE.md` or `AGENTS.md`, include a blockquote near the top like:
+  > **Keep this file up to date.** After any significant change — ... — update the relevant sections
+  > below. Stale instructions lead to wasted effort and broken assumptions. When in doubt, re-read
+  > the codebase and correct anything that has drifted.
+  Fill in the examples (after the dash) with things relevant to the specific project (e.g. new API routes, renamed files, schema migrations, added modules)
