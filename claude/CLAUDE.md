@@ -31,7 +31,7 @@
 - Add a body when the change is non-trivial
 - Never force push without explicit user confirmation
 - Never add Co-Authored-By lines to commits
-- Never include the "Generated with Claude Code" line in PR descriptions
+- Don't add self-attribution (e.g. "Generated with Claude Code", "Built by Claude") to commits, PRs, issues, or any other platform content
 
 ## Environment
   - Running on Windows with Git Bash (`C:\Program Files\Git\bin\bash.exe`)
