@@ -25,6 +25,9 @@ Cross-platform dotfiles repo. Configs are stored here and linked into their targ
 | `nvim/` | `AppData/Local/nvim` (win) / `~/.config/nvim` (linux) | all |
 | `sharex/` | `D:\ShareX` | windows |
 | `oh-my-posh/` | `AppData/.../Programs/oh-my-posh` (win) / `~/.config/oh-my-posh` (linux) | all |
+| `fastfetch/` | `~/.config/fastfetch` | all |
+| `glazewm/` | `~/.glzr/glazewm` | windows |
+| `yasb/` | `~/.config/yasb` | windows |
 
 ## setup.py behavior
 
@@ -32,6 +35,7 @@ Cross-platform dotfiles repo. Configs are stored here and linked into their targ
 - **Windows**: `os.link()` (hard links) for files, `mklink /J` (junctions) for directories. No admin required.
 - Idempotent — prints `OK` for existing correct links, only acts on changes.
 - Backs up existing files/dirs as `.bak` before replacing.
+- Modules with `platform_subdirs: True` link root-level files on all platforms, plus files from the matching `windows/` or `linux/` subdirectory (e.g. `fastfetch/`).
 
 ## Adding a module
 

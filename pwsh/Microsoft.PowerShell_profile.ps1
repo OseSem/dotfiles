@@ -1,5 +1,13 @@
 # Initialize Oh My Posh + Theme
 oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\star.omp.json" | Invoke-Expression
+try {
+    [Console]::InputEncoding = [System.Text.Encoding]::UTF8
+    [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+    $OutputEncoding = [System.Text.UTF8Encoding]::new($false)
+    chcp 65001 > $null
+}
+catch {}
+
 
 # Tell Windows Terminal the current directory (for split pane inheritance)
 [System.Environment]::SetEnvironmentVariable("PROMPT_COMMAND", "", "Process")
@@ -8,6 +16,12 @@ function prompt {
     $loc = $executionContext.SessionState.Path.CurrentLocation
     [Console]::Write("`e]9;9;$loc`e\")
     & $global:__OriginalPrompt
+}
+
+Clear-Host
+
+if (Get-Command fastfetch -ErrorAction SilentlyContinue) {
+    fastfetch -c "$env:USERPROFILE/.config/fastfetch/config.jsonc"
 }
 
 # Initialize GitHub Copilot

@@ -1,3 +1,6 @@
+# Secrets
+.env
+
 # Ruff cache
 .ruff_cache/
 

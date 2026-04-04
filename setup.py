@@ -9,6 +9,7 @@ Run: python setup.py
 """
 
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -16,6 +17,25 @@ from pathlib import Path
 
 DOTFILES_DIR = Path(__file__).resolve().parent
 IS_WINDOWS = sys.platform == "win32"
+ENV_FILE = DOTFILES_DIR / ".env"
+
+_TEMPLATE_RE = re.compile(r"\$\{(\w+)\}")
+
+
+def load_env() -> dict[str, str]:
+    """Load key=value pairs from .env file."""
+    env: dict[str, str] = {}
+    if not ENV_FILE.exists():
+        return env
+    for line in ENV_FILE.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if not line or line.startswith("#"):
+            continue
+        if "=" in line:
+            key, _, value = line.partition("=")
+            env[key.strip()] = value.strip()
+    return env
+
 
 # --- Output ---
 
@@ -32,6 +52,7 @@ try:
             "JUNCTION": "[bold cyan]  JUNCTION[/]",
             "BACKUP": "[bold yellow]  BACKUP[/]",
             "COPY": "[bold magenta]  COPY[/]",
+            "TEMPLATE": "[bold magenta]  TEMPLATE[/]",
             "SKIP": "[dim]  SKIP[/]",
             "ERROR": "[bold red]  ERROR[/]",
             "HEADER": "[bold]",
@@ -119,6 +140,20 @@ MODULES = {
         ),
         "platform": "all",
     },
+    "fastfetch": {
+        "target": Path.home() / ".config" / "fastfetch",
+        "platform": "all",
+        "platform_subdirs": True,
+    },
+    "glazewm": {
+        "target": Path.home() / ".glzr" / "glazewm",
+        "platform": "windows",
+    },
+    "yasb": {
+        "target": Path.home() / ".config" / "yasb",
+        "platform": "windows",
+        "template": True,
+    },
 }
 
 
@@ -166,6 +201,21 @@ def backup_existing(dst: Path) -> None:
         if backup.exists():
             backup.unlink()
         dst.rename(backup)
+
+
+def render_template(src: Path, dst: Path, env: dict[str, str]) -> None:
+    """Copy src to dst, replacing ${VAR} placeholders with values from env."""
+    content = src.read_text(encoding="utf-8")
+    rendered = _TEMPLATE_RE.sub(lambda m: env.get(m.group(1), m.group(0)), content)
+    if dst.exists():
+        if dst.read_text(encoding="utf-8") == rendered:
+            log("OK", str(dst))
+            return
+        backup_existing(dst)
+    else:
+        dst.parent.mkdir(parents=True, exist_ok=True)
+    dst.write_text(rendered, encoding="utf-8")
+    log("TEMPLATE", f"{dst} -> {src}")
 
 
 def link_dir(src: Path, dst: Path) -> None:
@@ -231,7 +281,14 @@ def link(src: Path, dst: Path) -> None:
         link_file(src, dst)
 
 
-def setup_module(name: str, target: Path, src_dir: Path) -> None:
+def setup_module(
+    name: str,
+    target: Path,
+    src_dir: Path,
+    platform_subdirs: bool = False,
+    template: bool = False,
+    env: dict[str, str] | None = None,
+) -> None:
     log("MODULE", name, f"{src_dir} -> {target}")
 
     if not src_dir.exists():
@@ -240,13 +297,31 @@ def setup_module(name: str, target: Path, src_dir: Path) -> None:
 
     target.mkdir(parents=True, exist_ok=True)
 
+    platform_dir_names = {"windows", "linux"}
+
     for item in sorted(src_dir.iterdir()):
-        link(item, target / item.name)
+        if platform_subdirs and item.is_dir() and item.name in platform_dir_names:
+            continue
+        if template and item.is_file() and env is not None:
+            render_template(item, target / item.name, env)
+        else:
+            link(item, target / item.name)
+
+    if platform_subdirs:
+        plat_dir = src_dir / current_platform()
+        if plat_dir.is_dir():
+            for item in sorted(plat_dir.iterdir()):
+                if template and item.is_file() and env is not None:
+                    render_template(item, target / item.name, env)
+                else:
+                    link(item, target / item.name)
 
 
 def main() -> None:
     log("HEADER", f"Dotfiles: {DOTFILES_DIR}")
     log("HEADER", f"Platform: {current_platform()}")
+
+    env = load_env()
 
     for name, cfg in MODULES.items():
         if not should_run(cfg["platform"]):
@@ -254,7 +329,14 @@ def main() -> None:
             continue
 
         src_dir = DOTFILES_DIR / name
-        setup_module(name, cfg["target"], src_dir)
+        setup_module(
+            name,
+            cfg["target"],
+            src_dir,
+            platform_subdirs=cfg.get("platform_subdirs", False),
+            template=cfg.get("template", False),
+            env=env,
+        )
 
     log("HEADER", "\nDone.")
 
