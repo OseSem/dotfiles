@@ -27,6 +27,7 @@ Cross-platform dotfiles repo. Configs are stored here and linked into their targ
 | `oh-my-posh/` | `AppData/.../Programs/oh-my-posh` (win) / `~/.config/oh-my-posh` (linux) | all |
 | `fastfetch/` | `~/.config/fastfetch` | all |
 | `glazewm/` | `~/.glzr/glazewm` | windows |
+| `glazewm-extra/` | `~/.config` | windows |
 | `yasb/` | `~/.config/yasb` | windows |
 
 ## setup.py behavior

@@ -149,6 +149,10 @@ MODULES = {
         "target": Path.home() / ".glzr" / "glazewm",
         "platform": "windows",
     },
+    "glazewm-extra": {
+        "target": Path.home() / ".config",
+        "platform": "windows",
+    },
     "yasb": {
         "target": Path.home() / ".config" / "yasb",
         "platform": "windows",

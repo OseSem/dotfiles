@@ -1,0 +1,7 @@
+[[focused_window_rules]]
+command = "set translucent 230"
+match_process_name = "^(?!A Dance of Fire and Ice|AimLab_tb|Banana|BananaShooter|BoplBattle|Content Warning|cs2|FactoryGameSteam|Fortify|FPSChess|GeometryDash|GettingOverIt|GlyphClient|hollow_knight|MageArena|oblinparty|Oblivity|Risk of Rain 2|RISK|RiotClientServices|RustClient|Subnautica|VALORANT|Warframe).*$"
+
+[[unfocused_window_rules]]
+command = "set translucent 2100"
+match_process_name = "^(?!A Dance of Fire and Ice|AimLab_tb|Banana|BananaShooter|BoplBattle|Content Warning|cs2|FactoryGameSteam|Fortify|FPSChess|GeometryDash|GettingOverIt|GlyphClient|hollow_knight|MageArena|oblinparty|Oblivity|Risk of Rain 2|RISK|RiotClientServices|RustClient|Subnautica|VALORANT|Warframe).*$"

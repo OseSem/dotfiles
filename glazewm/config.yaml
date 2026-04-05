@@ -74,9 +74,8 @@ window_effects:
       # Allowed values: 'square', 'rounded', 'small_rounded'.
       style: "square"
 
-    # Change the transparency of the window.
     transparency:
-      enabled: true
+      enabled: false
       # Can be something like '95%' or '0.95' for slightly transparent windows.
       # '0' or '0%' is fully transparent (and, by consequence, unfocusable).
       opacity: "95%"
@@ -117,7 +116,7 @@ window_behavior:
       maximized: false
 
       # Whether to show fullscreen windows as always on top.
-      shown_on_top: false
+      shown_on_top: true
 
 workspaces:
   - name: "1"
@@ -153,12 +152,14 @@ window_rules:
         window_class: { not_regex: "OpusApp" }
       - window_process: { equals: "POWERPNT" }
         window_class: { not_regex: "PPTFrameClass" }
-  
-  - commands: ["ignore", "set-opacity 100"]:
+
+  - commands: ["ignore", "set-fullscreen"]
+    match:
       # Trying to support games ig
-      - window_process: { regex: "(?i)(BananaShooter|VALORANT|RiotClientServices)" }
-
-
+      - window_process:
+          {
+            regex: "(?i)^(?!A Dance of Fire and Ice|AimLab_tb|Banana|BananaShooter|BoplBattle|Content Warning|cs2|FactoryGameSteam|Fortify|FPSChess|GeometryDash|GettingOverIt|GlyphClient|hollow_knight|MageArena|oblinparty|Oblivity|Risk of Rain 2|RISK|RiotClientServices|RustClient|Subnautica|VALORANT|Warframe).*$",
+          }
 
 binding_modes:
   # When enabled, the focused window can be resized via arrow keys or HJKL.
