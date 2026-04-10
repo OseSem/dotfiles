@@ -53,3 +53,4 @@ Cross-platform dotfiles repo. Configs are stored here and linked into their targ
 - Platform values: `"all"`, `"linux"`, `"windows"`.
 - **Never push to remote without explicit permission.** Commit freely, but always ask before running `git push` unless the user specifically requested it.
 - **Always run `python setup.py` when you're done making changes.** This ensures links are up to date after any file or module changes.
+- **Edit configs in this repo, not at their target locations.** When the user says "add to my config", "update my config", "change my settings", etc., always make the change in the corresponding module directory in this repo — never edit the file at its installed/linked location. The links created by `setup.py` ensure the changes propagate automatically.

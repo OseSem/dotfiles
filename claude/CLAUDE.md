@@ -25,6 +25,7 @@
 - For other languages, follow the project's existing formatter if configured.
 
 ## Git & Commits
+- When creating GitHub repos (`gh repo create`), always make them private (`--private`) unless explicitly told otherwise.
 - Always use conventional commits: `type(scope): description`
 - Types: `feat`, `fix`, `chore`, `refactor`, `docs`, `style`, `test`, `ci`, `perf`
 - Keep subject line under 72 characters
