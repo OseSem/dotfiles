@@ -1,5 +1,5 @@
 # Initialize Oh My Posh + Theme
-oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\star.omp.json" | Invoke-Expression
+oh-my-posh init pwsh --config "$env:LOCALAPPDATA\Programs\oh-my-posh\themes\star.omp.json" | Invoke-Expression
 try {
     [Console]::InputEncoding = [System.Text.Encoding]::UTF8
     [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
@@ -18,6 +18,19 @@ function prompt {
     & $global:__OriginalPrompt
 }
 
+# Add latest uv-installed Python to PATH
+$uvPythonRoot = "$env:APPDATA\uv\python"
+if (Test-Path $uvPythonRoot) {
+    $latestPython = Get-ChildItem $uvPythonRoot -Directory |
+        Where-Object { $_.Name -match 'cpython-(\d+\.\d+\.\d+)' } |
+        Sort-Object { [version]($_.Name -replace '^cpython-(\d+\.\d+\.\d+).*','$1') } -Descending |
+        Select-Object -First 1
+    if ($latestPython) {
+        $env:PATH = "$($latestPython.FullName);$($latestPython.FullName)\Scripts;$env:PATH"
+    }
+}
+Set-Alias py python
+
 Clear-Host
 
 if (Get-Command fastfetch -ErrorAction SilentlyContinue) {
@@ -25,7 +38,7 @@ if (Get-Command fastfetch -ErrorAction SilentlyContinue) {
 }
 
 # Initialize GitHub Copilot
-. "C:\Users\info\OneDrive\Documenten\WindowsPowerShell\gh-copilot.ps1"
+. "$HOME\Documents\WindowsPowerShell\gh-copilot.ps1"
 
 # Make a shortcut to activate venv
 function venv {

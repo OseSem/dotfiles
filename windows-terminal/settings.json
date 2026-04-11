@@ -65,7 +65,7 @@
             "colorScheme": "One Half Dark",
             "font": 
             {
-                "face": "Jetbrains Mono",
+                "face": "JetBrainsMono Nerd Font",
                 "size": 12
             },
             "historySize": 12000,
@@ -80,7 +80,7 @@
                 "commandline": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
                 "guid": "{ca92b743-2a21-4587-b5dc-055cf1723809}",
                 "hidden": false,
-                "icon": "C:\\Users\\info\\OneDrive\\Documenten\\ps.png",
+                "icon": "ms-appx:///ProfileIcons/pwsh.png",
                 "name": "Powershell",
                 "startingDirectory": "%USERPROFILE%"
             },
@@ -98,7 +98,7 @@
             },
             {
                 "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
-                "hidden": false,
+                "hidden": true,
                 "name": "PowerShell",
                 "source": "Windows.Terminal.PowershellCore"
             }

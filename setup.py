@@ -129,7 +129,7 @@ MODULES = {
         "platform": "all",
     },
     "sharex": {
-        "target": Path("D:/ShareX") if IS_WINDOWS else None,
+        "target": Path.home() / "Documents" / "ShareX" if IS_WINDOWS else None,
         "platform": "windows",
     },
     "oh-my-posh": {
