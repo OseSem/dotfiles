@@ -10,7 +10,7 @@ Cross-platform dotfiles repo. Configs are stored here and linked into their targ
 ## Repo layout
 
 - `setup.py` — the linker script. All module definitions live in the `MODULES` dict at the top.
-- Each top-level directory is a module (e.g. `claude/`, `hyprland/`). Its contents get linked into a target directory on the system.
+- Each top-level directory is a module (e.g. `claude/`, `git/`). Its contents get linked into a target directory on the system.
 - `.gitignore` — keeps ephemeral/sensitive files out of version control. When adding a new module, update this file with anything that shouldn't be tracked.
 
 ## Current modules
@@ -23,7 +23,7 @@ Cross-platform dotfiles repo. Configs are stored here and linked into their targ
 | `pwsh/` | `Documents/PowerShell` | windows |
 | `windows-terminal/` | `AppData/.../WindowsTerminal/LocalState` | windows |
 | `nvim/` | `AppData/Local/nvim` (win) / `~/.config/nvim` (linux) | all |
-| `sharex/` | `D:\ShareX` | windows |
+| `sharex/` | `Documents/ShareX` | windows |
 | `oh-my-posh/` | `AppData/.../Programs/oh-my-posh` (win) / `~/.config/oh-my-posh` (linux) | all |
 | `fastfetch/` | `~/.config/fastfetch` | all |
 | `glazewm/` | `~/.glzr/glazewm` | windows |

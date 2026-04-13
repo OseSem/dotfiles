@@ -27,6 +27,7 @@ IS_WINDOWS = sys.platform == "win32"
 ENV_FILE = DOTFILES_DIR / ".env"
 MANIFEST_FILE = DOTFILES_DIR / ".setup-manifest.json"
 
+
 _TEMPLATE_RE = re.compile(r"\$\{(\w+)\}")
 
 # Top-level dirs that are not modules (skipped by unreferenced-dir check).
@@ -143,11 +144,11 @@ MODULES = {
         "platform": "all",
     },
     "powershell": {
-        "target": _windows_documents() / "WindowsPowerShell" if IS_WINDOWS else None,
+        "target": _windows_documents() / "WindowsPowerShell",
         "platform": "windows",
     },
     "pwsh": {
-        "target": _windows_documents() / "PowerShell" if IS_WINDOWS else None,
+        "target": _windows_documents() / "PowerShell",
         "platform": "windows",
     },
     "git": {
@@ -162,8 +163,6 @@ MODULES = {
             / "Packages"
             / "Microsoft.WindowsTerminal_8wekyb3d8bbwe"
             / "LocalState"
-            if IS_WINDOWS
-            else None
         ),
         "platform": "windows",
     },
@@ -176,7 +175,7 @@ MODULES = {
         "platform": "all",
     },
     "sharex": {
-        "target": _windows_documents() / "ShareX" if IS_WINDOWS else None,
+        "target": _windows_documents() / "ShareX",
         "platform": "windows",
     },
     "oh-my-posh": {
@@ -668,8 +667,6 @@ def main() -> None:
                 continue
             if not should_run(cfg["platform"]):
                 continue
-            if cfg.get("target") is None:
-                continue
 
             ok, missing, wrong = status_module(
                 name,
@@ -697,8 +694,6 @@ def main() -> None:
             if not args.modules:
                 log("MODULE", name, f"SKIP (platform: {cfg['platform']})")
             continue
-        if cfg.get("target") is None:
-            continue
 
         managed, errors = setup_module(
             name,
@@ -721,8 +716,6 @@ def main() -> None:
             if args.modules and name not in args.modules:
                 continue
             if not should_run(cfg["platform"]):
-                continue
-            if cfg.get("target") is None:
                 continue
             processed.add(name)
 
