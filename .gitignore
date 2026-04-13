@@ -1,6 +1,9 @@
 # Secrets
 .env
 
+# Setup manifest (machine-specific state)
+.setup-manifest.json
+
 # Ruff cache
 .ruff_cache/
 
