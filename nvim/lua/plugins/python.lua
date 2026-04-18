@@ -1,17 +1,10 @@
 return {
-  -- Point pyright at uv's .venv, and add ty (Astral's type checker)
+  -- Use ty (Astral's Python type checker) instead of pyright.
+  -- The switch itself is done via vim.g.lazyvim_python_lsp in config/options.lua.
   {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        pyright = {
-          settings = {
-            python = {
-              venvPath = ".",
-              venv = ".venv",
-            },
-          },
-        },
         ty = {},
       },
     },
