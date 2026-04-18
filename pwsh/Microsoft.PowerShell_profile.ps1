@@ -38,16 +38,11 @@ if (Get-Command fastfetch -ErrorAction SilentlyContinue) {
 }
 
 # Initialize GitHub Copilot
-. "$HOME\Documents\WindowsPowerShell\gh-copilot.ps1"
+. "$PSScriptRoot\gh-copilot.ps1"
 
 # Make a shortcut to activate venv
 function venv {
     & "$PWD\.venv\Scripts\Activate.ps1"
-}
-
-# Make a shortcut to activate venv
-function pym {
-    python "$PWD\main.py"
 }
 
 # Claude with Dangerously Skip Permissions
