@@ -1,5 +1,5 @@
 return {
-  -- Git blame / diff decorations (gitsigns already in LazyVim, just enable extras)
+  -- Enable gitsigns current-line blame (500ms delay)
   {
     "lewis6991/gitsigns.nvim",
     opts = {
