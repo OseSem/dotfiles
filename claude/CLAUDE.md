@@ -13,6 +13,10 @@
   - Add: `pnpm add <package>`
   - Run: `pnpm run <script>`
 
+## Search
+- Always use `rg` (ripgrep) instead of `grep` for content search. Faster, respects `.gitignore`.
+- If `rg` is not installed, stop and tell the user to install it rather than falling back to `grep`.
+
 ## New Python Projects
 - Always initialize new Python projects with `uv init <name>`
 - Never manually create `pyproject.toml`, `setup.py`, or `requirements.txt` from scratch
@@ -33,6 +37,7 @@
 - Never force push without explicit user confirmation
 - Never add Co-Authored-By lines to commits
 - Don't add self-attribution (e.g. "Generated with Claude Code", "Built by Claude") to commits, PRs, issues, or any other platform content
+- Never generate or write a `.git/config` (or any git config) that sets/overrides `user.name`, `user.email`, `user.signingkey`, `commit.gpgsign`, or related identity/signing fields. Leave those to the user's existing global/system config.
 
 ## Environment
   - Running on Windows with Git Bash (`C:\Program Files\Git\bin\bash.exe`)
