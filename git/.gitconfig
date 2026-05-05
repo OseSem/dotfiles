@@ -1,5 +1,5 @@
 [user]
-	name = OseSem
+	name = Sem Noach
 	email = sem@osesem.xyz
 	signingkey = ~/.ssh/id_ed25519
 [commit]
@@ -12,3 +12,5 @@
 	gpgSign = true
 [gpg]
 	format = ssh
+[core]
+	safecrlf = false
