@@ -39,6 +39,9 @@
 - Don't add self-attribution (e.g. "Generated with Claude Code", "Built by Claude") to commits, PRs, issues, or any other platform content
 - Never generate or write a `.git/config` (or any git config) that sets/overrides `user.name`, `user.email`, `user.signingkey`, `commit.gpgsign`, or related identity/signing fields. Leave those to the user's existing global/system config.
 
+## Running Commands & Apps
+- **Never use the `run` skill.** To run the app or any command whose output you need, always launch it as a background shell and read the resulting `.output` file(s) for logs.
+
 ## Environment
   - Running on Windows with Git Bash (`C:\Program Files\Git\bin\bash.exe`)
   - Use Windows-compatible paths and commands
