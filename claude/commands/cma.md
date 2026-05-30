@@ -1,6 +1,7 @@
 ---
 name: commit-and-push
-description: Stage all changes, write a conventional commit message, and push to the current branch. Use this skill whenever the user says "commit and push", "cma", "commit everything", "push my changes", or any variation of wanting to stage + commit + push in one go. Also trigger when the user says things like "save my work to git" or "ship these changes".
+description: Stage all changes, write a conventional commit message, and push to the current branch. User-invocable only — run via /cma when the user explicitly asks for it.
+disable-model-invocation: true
 ---
 
 # Commit and Push
