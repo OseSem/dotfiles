@@ -18,6 +18,9 @@ function prompt {
     & $global:__OriginalPrompt
 }
 
+# Zoxide integration
+Invoke-Expression (& { (zoxide init powershell | Out-String) })
+
 # Add latest uv-installed Python to PATH
 $uvPythonRoot = "$env:APPDATA\uv\python"
 if (Test-Path $uvPythonRoot) {
