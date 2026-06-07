@@ -14,8 +14,8 @@
   - Run: `pnpm run <script>`
 
 ## Search
-- Always use `rg` (ripgrep) instead of `grep` for content search. Faster, respects `.gitignore`.
-- If `rg` is not installed, stop and tell the user to install it rather than falling back to `grep`.
+- Always use `rg` (ripgrep) instead of `grep` for content search. Faster, respects `.gitignore`. `rg` is always installed.
+- Prefer the Grep tool over shelling out for searches.
 
 ## New Python Projects
 - Always initialize new Python projects with `uv init <name>`
