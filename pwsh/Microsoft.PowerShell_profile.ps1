@@ -1,3 +1,25 @@
+# --- BEGIN user-env merge (added for SSH/service sessions) ---
+# Sessions spawned by a service (NetBird SSH, OpenSSH, scheduled tasks) inherit only the
+# machine environment, so user-scope variables and PATH entries are missing. Merge them in.
+# No-op in interactive sessions, where they are already present.
+if (-not $env:__USER_ENV_MERGED) {
+    foreach ($kv in [Environment]::GetEnvironmentVariables('User').GetEnumerator()) {
+        if ($kv.Key -ne 'PATH' -and -not (Test-Path "Env:\$($kv.Key)")) {
+            Set-Item "Env:\$($kv.Key)" $kv.Value
+        }
+    }
+    $userPath = [Environment]::GetEnvironmentVariable('PATH', 'User')
+    if ($userPath) {
+        $current = $env:PATH -split ';' | Where-Object { $_ }
+        $missing = $userPath -split ';' | Where-Object { $_ } |
+            ForEach-Object { [Environment]::ExpandEnvironmentVariables($_) } |
+            Where-Object { $_ -and $current -notcontains $_ }
+        if ($missing) { $env:PATH = (($current + $missing) -join ';') }
+    }
+    $env:__USER_ENV_MERGED = '1'
+}
+# --- END user-env merge ---
+
 # Initialize Oh My Posh + Theme
 oh-my-posh init pwsh --config "$env:LOCALAPPDATA\Programs\oh-my-posh\themes\star.omp.json" | Invoke-Expression
 try {
@@ -34,9 +56,8 @@ if (Test-Path $uvPythonRoot) {
 }
 Set-Alias py python
 
-Clear-Host
-
-if (Get-Command fastfetch -ErrorAction SilentlyContinue) {
+if (-not [Console]::IsOutputRedirected) { Clear-Host }
+if (-not [Console]::IsOutputRedirected -and (Get-Command fastfetch -ErrorAction SilentlyContinue)) {
     fastfetch -c "$env:USERPROFILE/.config/fastfetch/config.jsonc"
 }
 
