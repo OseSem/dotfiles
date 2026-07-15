@@ -8,6 +8,12 @@ if [[ -d "$_uv_python_root" ]]; then
 fi
 unset _uv_python_root _latest_uv_python
 
+# fnm (Node version manager). --use-on-cd auto-switches Node when entering a
+# directory with an .nvmrc / .node-version.
+if command -v fnm >/dev/null 2>&1; then
+  eval "$(fnm env --use-on-cd --shell zsh)"
+fi
+
 # Zoxide integration
 if command -v zoxide >/dev/null 2>&1; then
   eval "$(zoxide init zsh)"
