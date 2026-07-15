@@ -151,6 +151,10 @@ MODULES = {
         "target": Path.home(),
         "platform": "all",
     },
+    "zsh": {
+        "target": Path.home(),
+        "platform": "all",
+    },
     "windows-terminal": {
         "target": (
             Path.home()

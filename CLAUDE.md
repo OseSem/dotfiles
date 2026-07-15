@@ -19,6 +19,7 @@ Cross-platform dotfiles repo. Configs are stored here and linked into their targ
 |--------|--------|----------|
 | `claude/` | `~/.claude` | all |
 | `git/` | `~` | all |
+| `zsh/` | `~` | all |
 | `pwsh/` | `Documents/PowerShell` | windows |
 | `windows-terminal/` | `AppData/.../WindowsTerminal/LocalState` | windows |
 | `nvim/` | `AppData/Local/nvim` (win) / `~/.config/nvim` (linux) | all |
