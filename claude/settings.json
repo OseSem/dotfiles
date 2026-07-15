@@ -92,5 +92,7 @@
   },
   "effortLevel": "high",
   "autoUpdatesChannel": "latest",
-  "skipDangerousModePermissionPrompt": true
+  "skipDangerousModePermissionPrompt": true,
+  "theme": "dark",
+  "tui": "fullscreen"
 }
