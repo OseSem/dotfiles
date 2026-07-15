@@ -78,7 +78,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python C:/Users/Sem/.claude/hooks/ruff.py"
+            "command": "python ~/.claude/hooks/ruff.py"
           }
         ]
       }
