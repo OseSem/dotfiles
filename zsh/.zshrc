@@ -8,5 +8,10 @@ if [[ -d "$_uv_python_root" ]]; then
 fi
 unset _uv_python_root _latest_uv_python
 
+# Zoxide integration
+if command -v zoxide >/dev/null 2>&1; then
+  eval "$(zoxide init zsh)"
+fi
+
 # Claude Code
 alias cc='claude --dangerously-skip-permissions'
