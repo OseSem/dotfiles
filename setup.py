@@ -195,19 +195,6 @@ MODULES = {
         "platform": "all",
         "platform_subdirs": True,
     },
-    "glazewm": {
-        "target": Path.home() / ".glzr" / "glazewm",
-        "platform": "windows",
-    },
-    "glazewm-extra": {
-        "target": Path.home() / ".config",
-        "platform": "windows",
-    },
-    "yasb": {
-        "target": Path.home() / ".config" / "yasb",
-        "platform": "windows",
-        "template": True,
-    },
 }
 
 

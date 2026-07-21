@@ -27,9 +27,6 @@ Cross-platform dotfiles repo. Configs are stored here and linked into their targ
 | `sharex/` | `Documents/ShareX` | windows |
 | `oh-my-posh/` | `AppData/.../Programs/oh-my-posh` (win) / `~/.config/oh-my-posh` (linux) | all |
 | `fastfetch/` | `~/.config/fastfetch` | all |
-| `glazewm/` | `~/.glzr/glazewm` | windows |
-| `glazewm-extra/` | `~/.config` | windows |
-| `yasb/` | `~/.config/yasb` | windows |
 
 ## setup.py behavior
 
@@ -41,7 +38,7 @@ Cross-platform dotfiles repo. Configs are stored here and linked into their targ
 - Tracks all managed links in `.setup-manifest.json` (git-ignored, machine-specific).
 - The `pi` module tracks only secret-free settings and user-owned prompts, skills, extensions, and themes; credentials, sessions, trust state, generated data, binaries, and package checkouts remain local.
 - Warns about top-level directories not registered as modules.
-- Template modules (e.g. `yasb`) replace `${VAR}` placeholders with values from `.env`. See `.env.example` for available variables. Warns on undefined variables.
+- Template modules replace `${VAR}` placeholders with values from `.env`. See `.env.example` for available variables. Warns on undefined variables.
 - Exits with non-zero status if any errors occur.
 
 ### CLI flags
