@@ -1,0 +1,10 @@
+{
+  "lastChangelogVersion": "0.81.1",
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-5.6-sol",
+  "defaultThinkingLevel": "medium",
+  "theme": "dark",
+  "packages": [
+    "https://github.com/obra/superpowers"
+  ]
+}

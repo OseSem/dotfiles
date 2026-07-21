@@ -143,6 +143,10 @@ MODULES = {
         "target": Path.home() / ".claude",
         "platform": "all",
     },
+    "pi": {
+        "target": Path.home() / ".pi" / "agent",
+        "platform": "all",
+    },
     "pwsh": {
         "target": _windows_documents() / "PowerShell",
         "platform": "windows",

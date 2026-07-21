@@ -8,6 +8,7 @@ Cross-platform dotfiles managed with symlinks. Works on both Windows and Linux.
 dotfiles/
   setup.py        # links configs into their target locations
   CLAUDE.md       # instructions for Claude Code in this repo
+  pi/             # secret-free Pi settings and user-owned resources
   <module>/       # each folder is a module with config files
   <module>/       # mapped to a target directory via setup.py
   ...
@@ -40,7 +41,7 @@ MODULES = {
 }
 ```
 
-Every file and directory inside the module folder gets linked into the target:
+Every file and directory inside the module folder gets linked into the target. The `pi` module intentionally tracks only durable, secret-free settings, prompts, skills, extensions, and themes; credentials, sessions, trust decisions, generated model data, binaries, and installed package checkouts stay local.
 
 | Platform | Files | Directories |
 |----------|-------|-------------|
