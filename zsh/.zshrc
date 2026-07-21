@@ -21,3 +21,7 @@ fi
 
 # Claude Code
 alias cc='claude --dangerously-skip-permissions'
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/sem/.lmstudio/bin"
+# End of LM Studio CLI section
