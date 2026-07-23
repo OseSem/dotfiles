@@ -159,6 +159,10 @@ MODULES = {
         "target": Path.home(),
         "platform": "all",
     },
+    "tmux": {
+        "target": Path.home(),
+        "platform": "linux",
+    },
     "windows-terminal": {
         "target": (
             Path.home()
