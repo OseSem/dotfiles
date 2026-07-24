@@ -1,10 +1,5 @@
 # Dotfiles
 
-> **Keep this file up to date.** After any significant change — new modules, renamed files, added
-> configs, setup script changes, architectural decisions — update the relevant sections below.
-> Stale instructions lead to wasted effort and broken assumptions. When in doubt, re-read the
-> repo and correct anything that has drifted.
-
 Cross-platform dotfiles repo. Configs are stored here and linked into their target locations via `setup.py`.
 
 ## Repo layout

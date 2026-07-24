@@ -52,8 +52,10 @@
 - When unsure between two approaches, briefly state the tradeoff and ask
 - Don't add unnecessary comments to code that is already self-explanatory
 - Prefer returning early over deeply nested conditionals
-- When creating a `CLAUDE.md` or `AGENTS.md`, include a blockquote near the top like:
-  > **Keep this file up to date.** After any significant change — ... — update the relevant sections
-  > below. Stale instructions lead to wasted effort and broken assumptions. When in doubt, re-read
-  > the codebase and correct anything that has drifted.
-  Fill in the examples (after the dash) with things relevant to the specific project (e.g. new API routes, renamed files, schema migrations, added modules)
+- When creating a `CLAUDE.md` or `AGENTS.md`, do **not** add a "Keep this file up to date" blockquote
+  (or any similar meta-instruction) at the top. Start with the actual content.
+- Keep `CLAUDE.md` / `AGENTS.md` files short — they consume context on every task. Write only what
+  can't be recovered by reading the code: rules, invariants, rationale, and non-obvious decisions.
+  Leave out route catalogues, per-command prose, file trees, and schema column tables; those duplicate
+  the source and go stale fast. Put per-app detail in a nested `AGENTS.md` so it loads only when
+  working in that directory.
