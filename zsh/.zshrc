@@ -22,6 +22,10 @@ fi
 # Claude Code
 alias cc='claude --dangerously-skip-permissions'
 
+# Android SDK
+export ANDROID_HOME="$HOME/Library/Android/sdk"
+export PATH="$PATH:$ANDROID_HOME/platform-tools"
+
 # Added by LM Studio CLI (lms)
 export PATH="$PATH:/Users/sem/.lmstudio/bin"
 # End of LM Studio CLI section
