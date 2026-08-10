@@ -25,7 +25,10 @@
 - For scripts/tools (no package needed): `uv init --script` or just `uv run` with inline dependencies
 
 ## Code Formatting
-- **Python**: After writing or editing `.py` files, always run `ruff format <file>` and `ruff check --fix <file>`.
+- **Python**: After writing or editing `.py` files, always run `ruff format <file>` and
+  `ruff check --fix --unfixable F401 <file>`.
+  `F401` is excluded from autofix because it strips unused imports — including ones just added for
+  code not yet written, which means fighting the agent mid-edit.
 - For other languages, follow the project's existing formatter if configured.
 
 ## Git & Commits
