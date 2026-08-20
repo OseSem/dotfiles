@@ -8,6 +8,8 @@ Cross-platform dotfiles managed with symlinks. Works on both Windows and Linux.
 dotfiles/
   setup.py        # links configs into their target locations
   AGENTS.md       # instructions for coding agents in this repo
+  claude/         # Claude Code configuration and shared skills
+  codex/          # Codex user skills
   pi/             # secret-free Pi settings and user-owned resources
   <module>/       # each folder is a module with config files
   <module>/       # mapped to a target directory via setup.py

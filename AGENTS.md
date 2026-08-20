@@ -13,6 +13,7 @@ Cross-platform dotfiles repo. Configs are stored here and linked into their targ
 | Module | Target | Platform |
 |--------|--------|----------|
 | `claude/` | `~/.claude` | all |
+| `codex/` | `~/.agents/skills` | all |
 | `pi/` | `~/.pi/agent` | all |
 | `git/` | `~` | all |
 | `zsh/` | `~` | all |

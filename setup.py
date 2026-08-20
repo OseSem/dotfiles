@@ -143,6 +143,10 @@ MODULES = {
         "target": Path.home() / ".claude",
         "platform": "all",
     },
+    "codex": {
+        "target": Path.home() / ".agents" / "skills",
+        "platform": "all",
+    },
     "pi": {
         "target": Path.home() / ".pi" / "agent",
         "platform": "all",
