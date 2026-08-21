@@ -43,7 +43,7 @@ MODULES = {
 }
 ```
 
-Every file and directory inside the module folder gets linked into the target. The `pi` module intentionally tracks only durable, secret-free settings, prompts, skills, extensions, and themes; credentials, sessions, trust decisions, generated model data, binaries, and installed package checkouts stay local.
+Every file and directory inside the module folder gets linked into the target. The `pi` module intentionally tracks only durable, secret-free settings, context files, prompts, skills, extensions, and themes; credentials, sessions, trust decisions, generated model data, binaries, and installed package checkouts stay local.
 
 | Platform | Files | Directories |
 |----------|-------|-------------|
