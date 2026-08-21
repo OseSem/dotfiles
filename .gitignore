@@ -7,6 +7,9 @@
 # Ruff cache
 .ruff_cache/
 
+# Python bytecode
+__pycache__/
+
 # Pi
 ## Credentials, machine trust, and session history
 pi/auth.json
