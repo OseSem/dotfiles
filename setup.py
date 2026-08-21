@@ -167,6 +167,10 @@ MODULES = {
         "target": Path.home(),
         "platform": "linux",
     },
+    "ghostty": {
+        "target": Path.home() / ".config" / "ghostty",
+        "platform": "all",
+    },
     "windows-terminal": {
         "target": (
             Path.home()

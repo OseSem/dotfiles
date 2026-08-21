@@ -1,0 +1,6 @@
+# Ghostty configuration
+
+# Automatically install Ghostty's terminfo on remote hosts over SSH,
+# and propagate TERM correctly. Fixes "xterm-ghostty: unknown terminal type"
+# errors when SSHing into servers that don't have Ghostty's terminfo.
+shell-integration-features = ssh-env,ssh-terminfo

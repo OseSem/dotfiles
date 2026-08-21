@@ -18,6 +18,7 @@ Cross-platform dotfiles repo. Configs are stored here and linked into their targ
 | `git/` | `~` | all |
 | `zsh/` | `~` | all |
 | `tmux/` | `~` | linux |
+| `ghostty/` | `~/.config/ghostty` | all |
 | `pwsh/` | `Documents/PowerShell` | windows |
 | `windows-terminal/` | `AppData/.../WindowsTerminal/LocalState` | windows |
 | `nvim/` | `AppData/Local/nvim` (win) / `~/.config/nvim` (linux) | all |
@@ -33,7 +34,7 @@ Cross-platform dotfiles repo. Configs are stored here and linked into their targ
 - Backs up existing files/dirs as `.bak` before replacing.
 - Modules with `platform_subdirs: True` link root-level files on all platforms, plus files from the matching `windows/` or `linux/` subdirectory (e.g. `fastfetch/`).
 - Tracks all managed links in `.setup-manifest.json` (git-ignored, machine-specific).
-- The `pi` module tracks only secret-free settings and user-owned prompts, skills, extensions, and themes; credentials, sessions, trust state, generated data, binaries, and package checkouts remain local.
+- The `pi` module tracks only secret-free settings and user-owned context files, prompts, skills, extensions, and themes; credentials, sessions, trust state, generated data, binaries, and package checkouts remain local.
 - Warns about top-level directories not registered as modules.
 - Template modules replace `${VAR}` placeholders with values from `.env`. See `.env.example` for available variables. Warns on undefined variables.
 - Exits with non-zero status if any errors occur.
