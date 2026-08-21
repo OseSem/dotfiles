@@ -71,6 +71,7 @@
       "Bash(go clean:*)"
     ]
   },
+  "model": "opus",
   "hooks": {
     "PostToolUse": [
       {
@@ -92,7 +93,9 @@
   },
   "effortLevel": "high",
   "autoUpdatesChannel": "latest",
+  "tui": "fullscreen",
   "skipDangerousModePermissionPrompt": true,
   "theme": "dark",
-  "tui": "fullscreen"
+  "inputNeededNotifEnabled": true,
+  "agentPushNotifEnabled": true
 }
