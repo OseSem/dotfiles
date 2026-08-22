@@ -35,6 +35,9 @@ Cross-platform dotfiles repo. Configs are stored here and linked into their targ
 - Modules with `platform_subdirs: True` link root-level files on all platforms, plus files from the matching `windows/` or `linux/` subdirectory (e.g. `fastfetch/`).
 - Tracks all managed links in `.setup-manifest.json` (git-ignored, machine-specific).
 - The `pi` module tracks only secret-free settings and user-owned context files, prompts, skills, extensions, and themes; credentials, sessions, trust state, generated data, binaries, and package checkouts remain local.
+- A module entry that is itself a symlink to another location inside the repo is linked to its
+  resolved target (`resolve_repo_link`), so deployed links stay one hop deep instead of
+  chaining through the re-exporting module.
 - Warns about top-level directories not registered as modules.
 - Template modules replace `${VAR}` placeholders with values from `.env`. See `.env.example` for available variables. Warns on undefined variables.
 - Exits with non-zero status if any errors occur.
@@ -57,6 +60,19 @@ python setup.py -m nvim -m git         # only re-link nvim and git
 python setup.py --clean                # remove all managed links
 python setup.py --clean -m nvim        # remove only nvim links
 ```
+
+## The codex module
+
+`codex/` is not Codex-specific — it targets `~/.agents/skills`, the shared skills directory read by Codex, Cursor, Zed, opencode, Warp and the other agents listed in `~/.agents/.skill-lock.json`. Claude does not read it; Claude gets skills from `~/.claude/skills` and commands from `~/.claude/commands`.
+
+Since `setup.py` links each top-level entry of a module, `codex/` has to be a directory of entries — it is the hand-maintained list of which skills reach those other agents. Entries are symlinks to whichever module owns the content, so nothing is duplicated:
+
+- `codex/caveman` → `claude/skills/caveman` (same for the other skills)
+- `codex/merge-dependabot/SKILL.md` → `claude/commands/merge-dependabot.md`
+
+Adding a skill to `claude/skills/` does **not** expose it to the other agents. Symlink it into `codex/` too, then run `python setup.py -m codex`.
+
+`~/.agents/skills` is also written to by third-party skill installers, so it is linked per-entry rather than as one wholesale directory link.
 
 ## Adding a module
 

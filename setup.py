@@ -400,6 +400,22 @@ def link_file(src: Path, dst: Path, *, dry_run: bool = False) -> None:
         log("SYMLINK", f"{dst} -> {src}")
 
 
+def resolve_repo_link(item: Path) -> Path:
+    """Follow symlinks that point at another location inside this repo.
+
+    A module can re-export something another module owns (e.g. `codex/` exposes
+    skills that live under `claude/skills/`). Linking the resolved target keeps
+    the deployed link one hop deep instead of chaining through the re-export.
+    """
+    if not item.is_symlink():
+        return item
+    try:
+        resolved = item.resolve()
+    except OSError:
+        return item
+    return resolved if resolved.is_relative_to(DOTFILES_DIR) else item
+
+
 def link(src: Path, dst: Path, *, dry_run: bool = False) -> None:
     if src.is_dir():
         link_dir(src, dst, dry_run=dry_run)
@@ -438,12 +454,13 @@ def setup_module(
     def process_item(item: Path, target_dir: Path) -> None:
         nonlocal errors
         dst = target_dir / item.name
+        src = resolve_repo_link(item)
         try:
-            if template and item.is_file() and env is not None:
-                render_template(item, dst, env, dry_run=dry_run)
+            if template and src.is_file() and env is not None:
+                render_template(src, dst, env, dry_run=dry_run)
             else:
-                link(item, dst, dry_run=dry_run)
-            managed[str(dst)] = {"src": str(item), "module": name}
+                link(src, dst, dry_run=dry_run)
+            managed[str(dst)] = {"src": str(src), "module": name}
         except Exception as e:
             log("ERROR", f"{dst}: {e}")
             errors += 1
@@ -485,13 +502,14 @@ def status_module(
     def check_item(item: Path, target_dir: Path) -> None:
         nonlocal ok, missing, wrong
         dst = target_dir / item.name
+        src = resolve_repo_link(item)
 
-        if template and item.is_file() and env is not None:
-            state = check_template(item, dst, env)
-        elif item.is_dir():
-            state = check_dir_link(item, dst)
+        if template and src.is_file() and env is not None:
+            state = check_template(src, dst, env)
+        elif src.is_dir():
+            state = check_dir_link(src, dst)
         else:
-            state = check_file_link(item, dst)
+            state = check_file_link(src, dst)
 
         if state == "ok":
             log("OK", str(dst))
