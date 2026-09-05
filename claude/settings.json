@@ -71,7 +71,7 @@
       "Bash(go clean:*)"
     ]
   },
-  "model": "opus",
+  "model": "claude-fable-5-1[1m]",
   "hooks": {
     "PostToolUse": [
       {
@@ -95,6 +95,7 @@
   "autoUpdatesChannel": "latest",
   "tui": "fullscreen",
   "skipDangerousModePermissionPrompt": true,
+  "remoteControlAtStartup": false,
   "theme": "dark",
   "inputNeededNotifEnabled": true,
   "agentPushNotifEnabled": true
