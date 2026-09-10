@@ -1,6 +1,209 @@
 {
-  "permissions": {
-    "allow": [
+  "agentPushNotifEnabled" : true,
+  "autoUpdatesChannel" : "latest",
+  "effortLevel" : "high",
+  "enabledPlugins" : {
+    "frontend-design@claude-code-plugins" : true,
+    "frontend-design@claude-plugins-official" : true,
+    "pyright-lsp@claude-plugins-official" : true,
+    "superpowers@claude-plugins-official" : true
+  },
+  "hooks" : {
+    "Notification" : [
+      {
+        "hooks" : [
+          {
+            "args" : [
+              "--provider",
+              "claude"
+            ],
+            "command" : "\/Users\/sem\/Library\/Application Support\/StillOn\/AgentBridge\/StillOn",
+            "timeout" : 2,
+            "type" : "command"
+          }
+        ],
+        "matcher" : "permission_prompt|agent_needs_input|agent_completed|idle_prompt"
+      }
+    ],
+    "PermissionRequest" : [
+      {
+        "hooks" : [
+          {
+            "args" : [
+              "--provider",
+              "claude"
+            ],
+            "command" : "\/Users\/sem\/Library\/Application Support\/StillOn\/AgentBridge\/StillOn",
+            "timeout" : 2,
+            "type" : "command"
+          }
+        ]
+      }
+    ],
+    "PostToolUse" : [
+      {
+        "hooks" : [
+          {
+            "command" : "python ~\/.claude\/hooks\/ruff.py",
+            "type" : "command"
+          }
+        ],
+        "matcher" : "Edit|Write"
+      },
+      {
+        "hooks" : [
+          {
+            "args" : [
+              "--provider",
+              "claude"
+            ],
+            "command" : "\/Users\/sem\/Library\/Application Support\/StillOn\/AgentBridge\/StillOn",
+            "timeout" : 2,
+            "type" : "command"
+          }
+        ]
+      }
+    ],
+    "PostToolUseFailure" : [
+      {
+        "hooks" : [
+          {
+            "args" : [
+              "--provider",
+              "claude"
+            ],
+            "command" : "\/Users\/sem\/Library\/Application Support\/StillOn\/AgentBridge\/StillOn",
+            "timeout" : 2,
+            "type" : "command"
+          }
+        ]
+      }
+    ],
+    "PreToolUse" : [
+      {
+        "hooks" : [
+          {
+            "args" : [
+              "--provider",
+              "claude"
+            ],
+            "command" : "\/Users\/sem\/Library\/Application Support\/StillOn\/AgentBridge\/StillOn",
+            "timeout" : 2,
+            "type" : "command"
+          }
+        ]
+      }
+    ],
+    "SessionEnd" : [
+      {
+        "hooks" : [
+          {
+            "args" : [
+              "--provider",
+              "claude"
+            ],
+            "command" : "\/Users\/sem\/Library\/Application Support\/StillOn\/AgentBridge\/StillOn",
+            "timeout" : 2,
+            "type" : "command"
+          }
+        ]
+      }
+    ],
+    "Stop" : [
+      {
+        "hooks" : [
+          {
+            "args" : [
+              "--provider",
+              "claude"
+            ],
+            "command" : "\/Users\/sem\/Library\/Application Support\/StillOn\/AgentBridge\/StillOn",
+            "timeout" : 2,
+            "type" : "command"
+          }
+        ]
+      }
+    ],
+    "StopFailure" : [
+      {
+        "hooks" : [
+          {
+            "args" : [
+              "--provider",
+              "claude"
+            ],
+            "command" : "\/Users\/sem\/Library\/Application Support\/StillOn\/AgentBridge\/StillOn",
+            "timeout" : 2,
+            "type" : "command"
+          }
+        ]
+      }
+    ],
+    "SubagentStart" : [
+      {
+        "hooks" : [
+          {
+            "args" : [
+              "--provider",
+              "claude"
+            ],
+            "command" : "\/Users\/sem\/Library\/Application Support\/StillOn\/AgentBridge\/StillOn",
+            "timeout" : 2,
+            "type" : "command"
+          }
+        ]
+      }
+    ],
+    "SubagentStop" : [
+      {
+        "hooks" : [
+          {
+            "args" : [
+              "--provider",
+              "claude"
+            ],
+            "command" : "\/Users\/sem\/Library\/Application Support\/StillOn\/AgentBridge\/StillOn",
+            "timeout" : 2,
+            "type" : "command"
+          }
+        ]
+      }
+    ],
+    "TeammateIdle" : [
+      {
+        "hooks" : [
+          {
+            "args" : [
+              "--provider",
+              "claude"
+            ],
+            "command" : "\/Users\/sem\/Library\/Application Support\/StillOn\/AgentBridge\/StillOn",
+            "timeout" : 2,
+            "type" : "command"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit" : [
+      {
+        "hooks" : [
+          {
+            "args" : [
+              "--provider",
+              "claude"
+            ],
+            "command" : "\/Users\/sem\/Library\/Application Support\/StillOn\/AgentBridge\/StillOn",
+            "timeout" : 2,
+            "type" : "command"
+          }
+        ]
+      }
+    ]
+  },
+  "inputNeededNotifEnabled" : true,
+  "model" : "claude-fable-5-1[1m]",
+  "permissions" : {
+    "allow" : [
       "mcp__sentry__*",
       "Bash(cd:*)",
       "Bash(cd * && git status)",
@@ -71,32 +274,8 @@
       "Bash(go clean:*)"
     ]
   },
-  "model": "claude-fable-5-1[1m]",
-  "hooks": {
-    "PostToolUse": [
-      {
-        "matcher": "Edit|Write",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "python ~/.claude/hooks/ruff.py"
-          }
-        ]
-      }
-    ]
-  },
-  "enabledPlugins": {
-    "frontend-design@claude-plugins-official": true,
-    "pyright-lsp@claude-plugins-official": true,
-    "frontend-design@claude-code-plugins": true,
-    "superpowers@claude-plugins-official": true
-  },
-  "effortLevel": "high",
-  "autoUpdatesChannel": "latest",
-  "tui": "fullscreen",
-  "skipDangerousModePermissionPrompt": true,
-  "remoteControlAtStartup": false,
-  "theme": "dark",
-  "inputNeededNotifEnabled": true,
-  "agentPushNotifEnabled": true
+  "remoteControlAtStartup" : false,
+  "skipDangerousModePermissionPrompt" : true,
+  "theme" : "dark",
+  "tui" : "fullscreen"
 }
