@@ -1,5 +1,10 @@
 {
   "agentPushNotifEnabled" : true,
+  "attribution" : {
+    "commit" : "",
+    "pr" : "",
+    "sessionUrl" : false
+  },
   "autoUpdatesChannel" : "latest",
   "effortLevel" : "high",
   "enabledPlugins" : {
@@ -200,6 +205,7 @@
       }
     ]
   },
+  "includeCoAuthoredBy" : false,
   "inputNeededNotifEnabled" : true,
   "model" : "claude-fable-5-1[1m]",
   "permissions" : {
