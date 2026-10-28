@@ -39,7 +39,7 @@
 - Add a body when the change is non-trivial
 - Never force push without explicit user confirmation
 - Never add Co-Authored-By lines to commits
-- Don't add self-attribution (e.g. "Generated with Claude Code", "Built by Claude") to commits, PRs, issues, or any other platform content
+- Don't add self-attribution (e.g. "Generated with Claude Code", "Built by Claude") to commits, PRs, issues, or any other platform content, unless an invoked skill explicitly requires it (e.g. `file-pr`, `leaving-pr-comments`)
 - Never generate or write a `.git/config` (or any git config) that sets/overrides `user.name`, `user.email`, `user.signingkey`, `commit.gpgsign`, or related identity/signing fields. Leave those to the user's existing global/system config.
 
 ## Running Commands & Apps
