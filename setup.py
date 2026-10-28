@@ -143,8 +143,8 @@ MODULES = {
         "target": Path.home() / ".claude",
         "platform": "all",
     },
-    "codex": {
-        "target": Path.home() / ".agents" / "skills",
+    "agents": {
+        "target": Path.home() / ".agents",
         "platform": "all",
     },
     "pi": {
@@ -403,8 +403,8 @@ def link_file(src: Path, dst: Path, *, dry_run: bool = False) -> None:
 def resolve_repo_link(item: Path) -> Path:
     """Follow symlinks that point at another location inside this repo.
 
-    A module can re-export something another module owns (e.g. `codex/` exposes
-    skills that live under `claude/skills/`). Linking the resolved target keeps
+    A module can re-export something another module owns (e.g. `claude/skills`
+    and `pi/skills` point at `agents/skills/`). Linking the resolved target keeps
     the deployed link one hop deep instead of chaining through the re-export.
     """
     if not item.is_symlink():

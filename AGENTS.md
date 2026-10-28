@@ -12,8 +12,8 @@ Cross-platform dotfiles repo. Configs are stored here and linked into their targ
 
 | Module | Target | Platform |
 |--------|--------|----------|
+| `agents/` | `~/.agents` | all |
 | `claude/` | `~/.claude` | all |
-| `codex/` | `~/.agents/skills` | all |
 | `pi/` | `~/.pi/agent` | all |
 | `git/` | `~` | all |
 | `zsh/` | `~` | all |
@@ -61,18 +61,15 @@ python setup.py --clean                # remove all managed links
 python setup.py --clean -m nvim        # remove only nvim links
 ```
 
-## The codex module
+## Skills
 
-`codex/` is not Codex-specific — it targets `~/.agents/skills`, the shared skills directory read by Codex, Cursor, Zed, opencode, Warp and the other agents listed in `~/.agents/.skill-lock.json`. Claude does not read it; Claude gets skills from `~/.claude/skills` and commands from `~/.claude/commands`.
+`agents/skills/` is the single home for skills. It is shared by every agent:
 
-Since `setup.py` links each top-level entry of a module, `codex/` has to be a directory of entries — it is the hand-maintained list of which skills reach those other agents. Entries are symlinks to whichever module owns the content, so nothing is duplicated:
+- `~/.agents/skills` (Codex, Cursor, Zed, opencode, Warp and the others in `~/.agents/.skill-lock.json`) via the `agents` module. The module contains only `skills/`, so the rest of `~/.agents` (e.g. `.skill-lock.json`) stays local.
+- `~/.claude/skills` via `claude/skills` → `../agents/skills`.
+- `~/.pi/agent/skills` via `pi/skills` → `../agents/skills`.
 
-- `codex/caveman` → `claude/skills/caveman` (same for the other skills)
-- `codex/merge-dependabot/SKILL.md` → `claude/commands/merge-dependabot.md`
-
-Adding a skill to `claude/skills/` does **not** expose it to the other agents. Symlink it into `codex/` too, then run `python setup.py -m codex`.
-
-`~/.agents/skills` is also written to by third-party skill installers, so it is linked per-entry rather than as one wholesale directory link.
+Add new skills to `agents/skills/`, never through `claude/skills` or `pi/skills`. Skill installers and the Claude desktop sync (`synced/`, git-ignored) write straight into this folder, so check `git status` before committing.
 
 ## Adding a module
 
