@@ -37,6 +37,8 @@ End the description with the public model name and harness that made the
 changes, for example `Created with <model> in <harness>.` Include subagent
 models that wrote part of the change. Use the model name the harness reports.
 If model identity is unavailable, name the harness without guessing a model.
+When the harness runs inside T3 Code, add `(T3 Code)` after the harness name,
+for example `Created with Claude Opus 5.5 in Claude Code (T3 Code).`
 
 Before submission, check the title, description, quotes, and attachments for
 secrets and private details.

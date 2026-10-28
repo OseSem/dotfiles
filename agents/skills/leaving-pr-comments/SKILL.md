@@ -10,7 +10,7 @@ note callout:
 
 ```md
 > [!NOTE]
-> 🤖 **<model> responding on behalf of <user>**
+> 🤖 **<model> in <harness> responding on behalf of <user>**
 
 Actual comment starts here.
 ```
@@ -19,6 +19,9 @@ Use the verified public name of the model that wrote the comment, and the
 user's name or GitHub login.
 
 If the harness does not expose a model name, use the harness name. Do not guess.
+
+When the harness runs inside T3 Code, add `(T3 Code)` after the harness name,
+for example `Claude Opus 5.5 in Claude Code (T3 Code) responding on behalf of <user>`.
 
 Before posting, check the entire comment, including quoted text and
 attachments, for secrets and private details.
