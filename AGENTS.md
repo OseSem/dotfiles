@@ -14,6 +14,7 @@ Cross-platform dotfiles repo. Configs are stored here and linked into their targ
 |--------|--------|----------|
 | `agents/` | `~/.agents` | all |
 | `claude/` | `~/.claude` | all |
+| `codex/` | `~/.codex` | all |
 | `pi/` | `~/.pi/agent` | all |
 | `git/` | `~` | all |
 | `zsh/` | `~` | all |
@@ -38,6 +39,7 @@ Cross-platform dotfiles repo. Configs are stored here and linked into their targ
 - A module entry that is itself a symlink to another location inside the repo is linked to its
   resolved target (`resolve_repo_link`), so deployed links stay one hop deep instead of
   chaining through the re-exporting module.
+- A module's `exclude` set lists top-level entries that are not linked.
 - Warns about top-level directories not registered as modules.
 - Template modules replace `${VAR}` placeholders with values from `.env`. See `.env.example` for available variables. Warns on undefined variables.
 - Exits with non-zero status if any errors occur.
@@ -60,6 +62,10 @@ python setup.py -m nvim -m git         # only re-link nvim and git
 python setup.py --clean                # remove all managed links
 python setup.py --clean -m nvim        # remove only nvim links
 ```
+
+## Global agent instructions
+
+`agents/AGENTS.md` is the single source for the global instructions every agent loads. `claude/CLAUDE.md` and `codex/AGENTS.md` are symlinks to it, so edit `agents/AGENTS.md` and keep it agent-agnostic. The `agents` module excludes it (`exclude` in `MODULES`) so `~/.agents` gets only `skills/`. `codex/` holds only `AGENTS.md`; the rest of `~/.codex` stays local.
 
 ## Skills
 

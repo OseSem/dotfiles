@@ -146,6 +146,12 @@ MODULES = {
     "agents": {
         "target": Path.home() / ".agents",
         "platform": "all",
+        # Shared instructions; deployed through claude/CLAUDE.md and codex/AGENTS.md.
+        "exclude": {"AGENTS.md"},
+    },
+    "codex": {
+        "target": Path.home() / ".codex",
+        "platform": "all",
     },
     "pi": {
         "target": Path.home() / ".pi" / "agent",
@@ -434,6 +440,7 @@ def setup_module(
     platform_subdirs: bool = False,
     template: bool = False,
     env: dict[str, str] | None = None,
+    exclude: frozenset[str] | set[str] = frozenset(),
     dry_run: bool = False,
 ) -> tuple[dict[str, dict], int]:
     """Link module files. Returns (managed: {dst_str: info}, error_count)."""
@@ -468,6 +475,8 @@ def setup_module(
     for item in sorted(src_dir.iterdir()):
         if platform_subdirs and item.is_dir() and item.name in platform_dir_names:
             continue
+        if item.name in exclude:
+            continue
         process_item(item, target)
 
     if platform_subdirs:
@@ -487,6 +496,7 @@ def status_module(
     platform_subdirs: bool = False,
     template: bool = False,
     env: dict[str, str] | None = None,
+    exclude: frozenset[str] | set[str] = frozenset(),
 ) -> tuple[int, int, int]:
     """Check link health for a module. Returns (ok, missing, wrong) counts."""
     log("MODULE", name, f"-> {target}")
@@ -523,6 +533,8 @@ def status_module(
 
     for item in sorted(src_dir.iterdir()):
         if platform_subdirs and item.is_dir() and item.name in platform_dir_names:
+            continue
+        if item.name in exclude:
             continue
         check_item(item, target)
 
@@ -696,6 +708,7 @@ def main() -> None:
                 platform_subdirs=cfg.get("platform_subdirs", False),
                 template=cfg.get("template", False),
                 env=env,
+                exclude=cfg.get("exclude", frozenset()),
             )
             total_ok += ok
             total_missing += missing
@@ -723,6 +736,7 @@ def main() -> None:
             platform_subdirs=cfg.get("platform_subdirs", False),
             template=cfg.get("template", False),
             env=env,
+            exclude=cfg.get("exclude", frozenset()),
             dry_run=args.dry_run,
         )
         all_managed.update(managed)
